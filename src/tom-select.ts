@@ -2200,7 +2200,7 @@ export default class TomSelect extends MicroPlugin(MicroEvent){
 					const existingOption = self.input.querySelector(`option[value="${option_el.value}"]`);
 
 					if (existingOption) {
-						existingOption.parentElement.replaceChild(option_el, existingOption);
+						existingOption.parentElement?.replaceChild(option_el, existingOption);
 					} else {
 						self.input.append(option_el);
 					}
