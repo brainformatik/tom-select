@@ -2583,8 +2583,20 @@ export default class TomSelect extends MicroPlugin(MicroEvent){
 		self.wrapper.remove();
 		self.dropdown.remove();
 
+		// keep current selection
+		const selected = self.input instanceof HTMLSelectElement ? self.input.selectedOptions : document.createDocumentFragment().children;
+
 		self.input.innerHTML = revertSettings.innerHTML;
 		self.input.tabIndex = revertSettings.tabIndex;
+
+		// @ts-ignore
+		for (let option of selected) {
+			const originalOption = self.input.querySelector(`option[value="${option.value}"]`);
+
+			if (originalOption instanceof HTMLOptionElement) {
+				originalOption.selected = true;
+			}
+		}
 
 		removeClasses(self.input,'tomselected','ts-hidden-accessible');
 
